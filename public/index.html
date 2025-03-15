@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IMLS Public Library Survey Explorer</title>
+    <link rel="stylesheet" href="css/vendor/normalize.css" />
+    <link rel="stylesheet" href="css/vendor/leaflet.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="icon" href="img/icon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="Visualizing and exploring IMLS public library survey data"
+    />
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="panel">
+        <div class="panel-menu">
+          <button
+            id="button-results"
+            class="tab-button active"
+            data-tab="tab-results"
+          >
+            Results
+          </button>
+          <button id="button-filters" class="tab-button" data-tab="tab-filters">
+            Filters
+          </button>
+          <button id="button-colors" class="tab-button" data-tab="tab-colors">
+            Colors
+          </button>
+          <button id="button-search" class="tab-button" data-tab="tab-search">
+            Search
+          </button>
+          <button id="button-info" class="tab-button" data-tab="tab-info">
+            Info
+          </button>
+        </div>
+        <div class="panel-tabs">
+          <div id="tab-results" class="panel-tab active">
+            <p>Loading data...</p>
+          </div>
+          <div id="tab-filters" class="panel-tab">
+            <h2>Filter results by:</h2>
+            <div id="filters-content"></div>
+          </div>
+          <div id="tab-colors" class="panel-tab">
+            <h2>Color the map by:</h2>
+            <div id="colors-content"></div>
+          </div>
+          <div id="tab-search" class="panel-tab">
+            <form id="search-form">
+              <label for="search-input">Search by name or city/town</label>
+              <input type="text" name="search" id="search-input" />
+              <button type="submit">Search</button>
+            </form>
+
+            <ul id="search-result-list" class="result-list"></ul>
+          </div>
+          <div id="tab-info" class="panel-tab">
+            <h2>About this interface</h2>
+            <p>
+              This web interface aims to visualize and explore
+              <a
+                href="https://www.imls.gov/research-evaluation/data-collection/public-libraries-survey"
+                target="_blank"
+                >public library survey</a
+              >
+              data. The data sources are:
+            </p>
+            <ul>
+              <li>
+                <a
+                  href="https://www.imls.gov/research-evaluation/data-collection/public-libraries-survey"
+                  target="_blank"
+                  >FY 2022 Public Library Survey</a
+                >,
+                <a href="https://www.imls.gov"
+                  >Institute of Museum and Library Service (IMLS)</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://data.census.gov/table/ACSDT5Y2023.B19013"
+                  target="_blank"
+                  >Median Household Income, 2023 ACS 5-Year Estimates</a
+                >,
+                <a href="https://data.census.gov/" target="_blank"
+                  >U.S. Census Bureau</a
+                >
+              </li>
+            </ul>
+            <p>
+              To make the demographic data from the Census more representative
+              of reality, for public libraries serving places categorized as
+              "cities" (small, medium, or large), Census data is matched on the
+              county level. For all other places (suburb, town, rural), Census
+              data is matched on zipcode tabular area.
+            </p>
+            <p>
+              Source code can be found on
+              <a
+                href="https://github.com/beefoo/imls-data-explorer/"
+                target="_blank"
+                >Github</a
+              >.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="viewer">
+        <div id="map" class="map"></div>
+        <div id="quant-key" class="key active">
+          <div id="quant-key-label-left">Less</div>
+          <div id="quant-key-label"></div>
+          <div id="quant-key-label-right">More</div>
+        </div>
+        <a href="index.html" id="reset-link" class="reset-button">Reset all</a>
+        <div id="meta" class="meta">
+          <div class="meta-head">
+            <h2 id="meta-title" class="meta-title"></h2>
+            <div class="meta-menu">
+              <button
+                id="tab-button-details"
+                class="tab-button active"
+                data-tab="meta-details"
+              >
+                Metadata
+              </button>
+              <button
+                id="tab-button-similar"
+                class="tab-button"
+                data-tab="meta-similar"
+              >
+                Similar libraries
+              </button>
+            </div>
+          </div>
+          <div id="meta-details" class="meta-details panel-tab active"></div>
+          <div id="meta-similar" class="meta-similar panel-tab"></div>
+          <button id="close-details" class="close-details">⏷</button>
+        </div>
+      </div>
+    </div>
+    <script src="js/main.js" type="module"></script>
+  </body>
+</html>
